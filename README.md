@@ -726,13 +726,11 @@ node prisma/seed
 ### Create More Components
 
 - global
-
   - EmptyList
   - SectionTitle
   - LoadingContainer
 
 - home
-
   - FeaturedProducts
   - Hero
   - HeroCarousel
@@ -1281,7 +1279,7 @@ function NavSearch() {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const [search, setSearch] = useState(
-    searchParams.get("search")?.toString() || ""
+    searchParams.get("search")?.toString() || "",
   );
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -2177,7 +2175,7 @@ export function SubmitButton({
 ```ts
 export type actionFunction = (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => Promise<{ message: string }>;
 
 export type CartItem = {
@@ -2241,7 +2239,7 @@ export default FormContainer;
 
 export const createProductAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   return { message: "product created" };
 };
@@ -2335,7 +2333,7 @@ const getAuthUser = async () => {
 ```ts
 export const createProductAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
 
@@ -2399,7 +2397,7 @@ export const productSchema = z.object({
 ```ts
 export const createProductAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
 
@@ -2451,7 +2449,7 @@ export const productSchema = z.object({
     },
     {
       message: "description must be between 10 and 1000 words.",
-    }
+    },
   ),
 });
 ```
@@ -2484,7 +2482,7 @@ schemas.ts
 ```ts
 export function validateWithZodSchema<T>(
   schema: ZodSchema<T>,
-  data: unknown
+  data: unknown,
 ): T {
   const result = schema.safeParse(data);
   if (!result.success) {
@@ -2582,7 +2580,7 @@ const bucket = "your-bucket-name";
 // Create a single supabase client for interacting with your database
 export const supabase = createClient(
   process.env.SUPABASE_URL as string,
-  process.env.SUPABASE_KEY as string
+  process.env.SUPABASE_KEY as string,
 );
 
 export const uploadImage = async (image: File) => {
@@ -2607,7 +2605,7 @@ export const uploadImage = async (image: File) => {
 ```ts
 export const createProductAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
 
@@ -2880,13 +2878,13 @@ export const fetchAdminProductDetails = async (productId: string) => {
 
 export const updateProductAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   return { message: "Product updated successfully" };
 };
 export const updateProductImageAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   return { message: "Product Image updated successfully" };
 };
@@ -2959,7 +2957,7 @@ actions.ts
 ```ts
 export const updateProductAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   await getAdminUser();
   try {
@@ -3066,7 +3064,7 @@ return (
 ```ts
 export const updateProductImageAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   await getAuthUser();
   try {
@@ -3473,7 +3471,7 @@ npx prisma db push
 ```ts
 export const createReviewAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   return { message: "review submitted successfully" };
 };
@@ -3645,7 +3643,7 @@ export const reviewSchema = z.object({
 ```ts
 export const createReviewAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   const user = await getAuthUser();
   try {
@@ -4170,7 +4168,7 @@ type SelectCartItemAmountProps = {
 };
 
 function SelectProductAmount(
-  props: SelectProductAmountProps | SelectCartItemAmountProps
+  props: SelectProductAmountProps | SelectCartItemAmountProps,
 ) {
   const { mode, amount, setAmount } = props;
 
@@ -4384,7 +4382,6 @@ export const addToCartAction = async (prevState: any, formData: FormData) => {
 ### Cart Page
 
 - create components/cart
-
   - CartItemColumns.tsx
   - CartItemsList.tsx
   - CartTotals.tsx
@@ -4580,7 +4577,7 @@ actions.ts
 ```ts
 export const removeCartItemAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   return { message: "Item removed from cart" };
 };
@@ -5156,7 +5153,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
 );
 
 export default function CheckoutPage() {
