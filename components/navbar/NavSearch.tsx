@@ -17,7 +17,7 @@ function NavSearch() {
             params.delete("search");
         }
         replace(`/products?${params.toString()}`);
-    }, 300);
+    }, 500);
 
   useEffect(() => {
   setSearch(searchParam);
