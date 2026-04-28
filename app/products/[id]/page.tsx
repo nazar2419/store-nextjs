@@ -1,5 +1,5 @@
 import BreadCrumbs from "@/components/single-product/BreadCrumbs";
-import { fetchSingleProduct } from "@/utils/actions";
+import { fetchSingleProduct, findExistingReview } from "@/utils/actions";
 import Image from "next/image";
 import { formatCurrency } from "@/utils/format";
 import FavoriteToggleButton from "@/components/products/FavoriteToggleButton";
@@ -7,15 +7,21 @@ import AddToCart from "@/components/single-product/AddToCart";
 import ProductRating from "@/components/single-product/ProductRating";
 import { notFound } from "next/navigation";
 import ShareButton from "@/components/single-product/ShareButton";
+import SubmitReview from "@/components/reviews/SubmitReview";
+import ProductReviews from "@/components/reviews/ProductReviews";
+import { auth } from "@clerk/nextjs/server";
 async function SingleProductPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const { userId } =  await  auth();
   const product = await fetchSingleProduct(id);
   const { name, image, company, description, price } = product;
   const dollarsAmount = formatCurrency(price);
+    const reviewDoesNotExist =
+    userId && !(await findExistingReview(userId, product.id));
   if (!product) {
     notFound();
   }
@@ -56,6 +62,8 @@ async function SingleProductPage({
           </div>
         </div>
       </div>
+      <ProductReviews productId={id} />
+      {reviewDoesNotExist && <SubmitReview productId={id} />}
     </section>
   );
 }
